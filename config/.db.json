@@ -1,0 +1,18 @@
+{
+  "database": {
+    "func-api": {
+      "jdbc_drive": "mysql",
+      "host": "func-api",
+      "port": "",
+      "db_name": "",
+      "db_user_Name": "",
+      "db_password": "",
+      "url": ""
+    }
+  },
+  "current_db_context": "func-api",
+  "return_type": "json",
+  "url": "",
+  "username": "",
+  "password": ""
+}

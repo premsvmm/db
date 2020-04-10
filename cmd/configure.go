@@ -9,8 +9,8 @@ import (
 // configureCmd represents the configure command
 var configureCmd = &cobra.Command{
 	Use:   "configure",
-	Short: "Configure help to configure the mock url and credentials",
-	Long: `Configure help to configure the mock url and credentials`,
+	Short: "configure the mock url and credentials",
+	Long: `configure the mock url and credentials`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("configure called")
 	},
