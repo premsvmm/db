@@ -17,7 +17,6 @@ package cmd
 
 import (
 	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -27,7 +26,7 @@ var execCmd = &cobra.Command{
 	Short: "execute the sql commands",
 	Long: `execute the sql commands`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("exec called")
+		fmt.Print(args)
 	},
 }
 
