@@ -1,9 +1,7 @@
-
 package cmd
 
 import (
 	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -11,8 +9,13 @@ import (
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List the db",
-	Long: `List the db`,
+	Long:  `List the db`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("list called")
+		fmt.Println(`List of Database added in config file:
+**************************************`)
+		for key, _ := range conf.Database {
+			fmt.Println(conf.Database[key].Name)
+		}
+		fmt.Println("**************************************")
 	},
 }

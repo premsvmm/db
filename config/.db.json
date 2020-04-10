@@ -1,18 +1,29 @@
 {
-  "database": {
-    "func-api": {
+  "database": [
+    {
       "jdbc_drive": "mysql",
       "host": "func-api",
-      "port": "",
-      "db_name": "",
-      "db_user_Name": "",
-      "db_password": "",
-      "url": ""
+      "port": "123",
+      "db_name": "prem",
+      "db_user_Name": "prem",
+      "db_password": "prem",
+      "url": "prem",
+      "name": "func-api"
+    },
+    {
+      "jdbc_drive": "mysql",
+      "host": "func-api",
+      "port": "prem",
+      "db_name": "prem",
+      "db_user_Name": "prem",
+      "db_password": "prem",
+      "url": "prem",
+      "name": "func-automation"
     }
-  },
+  ],
   "current_db_context": "func-api",
   "return_type": "json",
-  "url": "",
-  "username": "",
-  "password": ""
+  "url": "prem",
+  "username": "prem",
+  "password": "prem"
 }

@@ -2,11 +2,15 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/premsvmm/db/model"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"os"
-)
 
+)
+var (
+	conf model.Config
+)
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "db",
@@ -27,7 +31,7 @@ func Execute() {
 }
 
 func init() {
-	cobra.OnInitialize(initConfig)
+	cobra.OnInitialize(InitConfig)
 	rootCmd.AddCommand(execCmd)
 	rootCmd.AddCommand(setDbCtxCmd)
 	rootCmd.AddCommand(configureCmd)
@@ -37,7 +41,7 @@ func init() {
 }
 
 // initConfig reads in config file and ENV variables if set.
-func initConfig() {
+func InitConfig(){
 	//present working directory
 	dir, err := os.Getwd()
 	if err != nil {
@@ -50,8 +54,8 @@ func initConfig() {
 	viper.SetConfigType("json")
 	viper.AutomaticEnv() // read in environment variables that match
 	// If a config file is found, read it in.
-	if err := viper.ReadInConfig(); err == nil {
-		fmt.Println("Using config file:", viper.ConfigFileUsed())
+	if err := viper.ReadInConfig(); err != nil {
+		fmt.Println("Error in loading the config")
 	}
-	fmt.Println(viper.AllKeys())
+	viper.Unmarshal(&conf)
 }
