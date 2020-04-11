@@ -17,6 +17,7 @@ go get -u https://github.com/premsvmm/db
 
 After installation, type `db`
 
+![DB_COMMAND](https://github.com/premsvmm/db/blob/master/img/1.png)
 
 
 **Reference Link**
