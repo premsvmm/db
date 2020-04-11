@@ -2,13 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/blang/semver"
 	"github.com/premsvmm/db/model"
-	"github.com/rhysd/go-github-selfupdate/selfupdate"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"go/build"
-	"log"
 	"os"
 )
 
@@ -21,7 +18,6 @@ const (
 	folder_dir = "/src/github.com/premsvmm/db/config/"
 	file_name  = ".db"
 	extension  = "json"
-	version    = "1.0.7"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -63,7 +59,6 @@ func init() {
 
 // initConfig reads in config file and ENV variables if set.
 func InitConfig() {
-	doSelfUpdate()
 	//present working directory
 	dir := build.Default.GOPATH
 	file_path = dir + folder_dir + file_name + "." + extension
@@ -81,23 +76,4 @@ func InitConfig() {
 		fmt.Println("Error in loading the config")
 	}
 	viper.Unmarshal(&conf)
-}
-
-func doSelfUpdate() {
-	selfupdate.EnableLog()
-	v := semver.MustParse(version)
-	fmt.Println(v)
-	latest, err := selfupdate.UpdateSelf(v, "premsvmm/db")
-	fmt.Println(latest)
-	if err != nil {
-		log.Println("Binary update failed:", err)
-		return
-	}
-	if latest.Version.Equals(v) {
-		// latest version is the same as current version. It means current binary is up to date.
-		log.Println("Current binary is the latest version", version)
-	} else {
-		log.Println("Successfully updated to version", latest.Version)
-		log.Println("Release note:\n", latest.ReleaseNotes)
-	}
 }
