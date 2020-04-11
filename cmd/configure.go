@@ -15,6 +15,10 @@ var (
 	reset       string
 )
 
+const (
+	return_type_const = "json"
+)
+
 // configureCmd represents the configure command
 var configureCmd = &cobra.Command{
 	Use:   "configure",
@@ -27,30 +31,32 @@ var configureCmd = &cobra.Command{
 			conf.ReturnType = ""
 			conf.Username = ""
 			time.Sleep(1000 * time.Millisecond)
-			service.GenerateGoFile(file_path,conf)
-			fmt.Println("✔ Values are reseted, Please set the value again")
+			service.GenerateGoFile(file_path, conf)
+			fmt.Println("🤯️ Values are reseted, Please set the value again")
 		} else {
 			if service_url != "" {
 				conf.URL = service_url
-				fmt.Println("✔ Service url is set")
+				fmt.Println("👀️ Service url is set")
 				time.Sleep(1000 * time.Millisecond)
 			}
 			if return_type != "" {
 				conf.ReturnType = return_type
-				fmt.Println("✔ Return type is set")
+				fmt.Println("👀️ Return type is set")
 				time.Sleep(1000 * time.Millisecond)
+			} else {
+				conf.ReturnType = return_type_const
 			}
 			if username != "" {
 				conf.Username = username
-				fmt.Println("✔ Username is set")
+				fmt.Println("👀️ Username is set")
 				time.Sleep(1000 * time.Millisecond)
 			}
 			if password != "" {
 				conf.Password = password
-				fmt.Println("✔ Password is set")
+				fmt.Println("👀️ Password is set")
 				time.Sleep(1000 * time.Millisecond)
 			}
-			service.GenerateGoFile(file_path,conf)
+			service.GenerateGoFile(file_path, conf)
 		}
 	},
 }
@@ -58,8 +64,8 @@ var configureCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(configureCmd)
 	configureCmd.Flags().StringVarP(&service_url, "url", "U", "", "Service Url")
-	configureCmd.Flags().StringVarP(&return_type, "rtype", "R", "", "Return type (json or map)")
 	configureCmd.Flags().StringVarP(&username, "username", "N", "", "Username")
 	configureCmd.Flags().StringVarP(&password, "password", "P", "", "Password")
-	configureCmd.Flags().StringVarP(&reset, "reset", "r", "", "Reset")
+	configureCmd.Flags().StringVarP(&reset, "reset", "R", "", "Reset")
+	configureCmd.Flags().StringVarP(&return_type, "returntype", "r", "", "Return type (json or map)")
 }

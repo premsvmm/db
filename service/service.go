@@ -41,14 +41,23 @@ func ExecuteMock(sql string, conf model.Config) {
 			fmt.Println(string(pretty.Color(formatedBody, nil)))
 		} else {
 			fmt.Println("*******************************************************")
-			fmt.Println("HAHA. To smart error in you query pls check "+ string(data))
+			fmt.Println("HAHA. To smart error in you query pls check " + string(data))
 			fmt.Println("*******************************************************")
 		}
 	}
 }
 
-func GenerateGoFile(file_path string,conf model.Config){
-	jsonValue, _ := json.MarshalIndent(conf,"","")
+func GenerateGoFile(file_path string, conf model.Config) {
+	jsonValue, _ := json.MarshalIndent(conf, "", "")
 	formatedBody := pretty.Pretty(jsonValue)
-	ioutil.WriteFile(file_path,formatedBody,0644)
+	ioutil.WriteFile(file_path, formatedBody, 0644)
+}
+
+func ListDownTheDBName(conf model.Config) {
+	fmt.Println(`List of Database added in config file:
+**************************************`)
+	for key, _ := range conf.Database {
+		fmt.Println("👻 "+conf.Database[key].Name)
+	}
+	fmt.Println("**************************************")
 }

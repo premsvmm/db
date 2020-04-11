@@ -10,12 +10,13 @@ import (
 var execCmd = &cobra.Command{
 	Use:   "exec",
 	Short: "execute the sql commands",
-	Long: `execute the sql commands`,
+	Long:  `execute the sql commands`,
 	Run: func(cmd *cobra.Command, args []string) {
-		str:=strings.Join(args," ")
-		service.ExecuteMock(str,conf)
+		str := strings.Join(args, " ")
+		service.ExecuteMock(str, conf)
 	},
 }
+
 func init() {
 	rootCmd.AddCommand(execCmd)
 }

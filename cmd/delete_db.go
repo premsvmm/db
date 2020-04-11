@@ -9,11 +9,12 @@ import (
 var deleteDbCmd = &cobra.Command{
 	Use:   "delete-db",
 	Short: "Delete db value to properties",
-	Long: `Delete db value to properties.`,
+	Long:  `Delete db value to properties.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("addDb called")
 	},
 }
+
 func init() {
 	rootCmd.AddCommand(deleteDbCmd)
 }

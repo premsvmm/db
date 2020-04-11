@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"fmt"
+	"github.com/premsvmm/db/service"
 	"github.com/spf13/cobra"
 )
 
@@ -11,12 +11,7 @@ var listCmd = &cobra.Command{
 	Short: "List the db",
 	Long:  `List the db`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(`List of Database added in config file:
-**************************************`)
-		for key, _ := range conf.Database {
-			fmt.Println(conf.Database[key].Name)
-		}
-		fmt.Println("**************************************")
+		service.ListDownTheDBName(conf)
 	},
 }
 
