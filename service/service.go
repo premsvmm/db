@@ -42,7 +42,7 @@ func ExecuteMock(sql string, conf model.Config) {
 			fmt.Println(string(pretty.Color(formatedBody, nil)))
 		} else {
 			fmt.Println("*******************************************************")
-			fmt.Println("HAHA. To smart error in you query pls check " + string(data))
+			fmt.Println("HAHA. Too smart error in you query pls check " + string(data))
 			fmt.Println("*******************************************************")
 		}
 	}

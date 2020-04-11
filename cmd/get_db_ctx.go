@@ -11,7 +11,7 @@ var getDbCtxCmd = &cobra.Command{
 	Short: "Get Current Db Context",
 	Long:  "Get the current Db Context \nUsage : \n-> db get",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Current Db Context : " + conf.CurrentDbContext)
+		fmt.Println("👽 Current DB Set: " + conf.CurrentDbContext)
 	},
 }
 

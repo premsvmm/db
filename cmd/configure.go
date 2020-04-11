@@ -22,8 +22,8 @@ const (
 // configureCmd represents the configure command
 var configureCmd = &cobra.Command{
 	Use:   "configure",
-	Short: "configure the mock url and credentials",
-	Long:  `configure the mock url and credentials`,
+	Short: "configure the properties",
+	Long:  `configure the properties`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(reset) > 0 {
 			conf.Password = ""

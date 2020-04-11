@@ -2,25 +2,29 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/go-playground/validator/v10"
 	"github.com/premsvmm/db/model"
 	"github.com/premsvmm/db/service"
 	"github.com/spf13/cobra"
-	"strings"
 )
 
 var (
-	add_db   model.Db
-	validate *validator.Validate
+	add_db model.Db
 )
 
 var addDbCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Add db value to properties",
-	Long:  `Add db value to properties.`,
+	Long: `Add db value to properties.
+
+Example: 
+db add -1 <jdbcdriver> -2 <host> -3 <port> -4 <dbname> -5 <dbusername> -6 <dbpassword> -7 <name> -8 <dburl> 
+
+Default Values:
+jdbcdriver = MYSQL_DRIVER,POSTGRESS_DRIVER
+`,
 	Run: func(cmd *cobra.Command, args []string) {
 		//Ref :https://stackoverflow.com/questions/33892599/how-to-initialize-values-for-nested-struct-array-in-golang
-		if ValidateAllValuePresent() {
+		if add_db.ValidateAllValuePresent() {
 			newDb := model.Db{
 				JdbcDrive:  add_db.JdbcDrive,
 				Host:       add_db.Host,
@@ -54,40 +58,4 @@ func init() {
 	addDbCmd.Flags().StringVarP(&add_db.DbPassword, "dbpassword", "6", "", "Database password")
 	addDbCmd.Flags().StringVarP(&add_db.Name, "name", "7", "", "Name")
 	addDbCmd.Flags().StringVarP(&add_db.URL, "dburl", "8", "", "Datbase Url")
-}
-
-func ValidateAllValuePresent() bool {
-	validate = validator.New()
-	err := validate.Struct(add_db)
-	if err != nil {
-		fmt.Println("****************************************")
-		for _, e := range err.(validator.ValidationErrors) {
-			fmt.Print("❌ ")
-			fmt.Println(FiledError{e}.String())
-
-		}
-		return false
-	}
-	return true
-}
-
-type FiledError struct {
-	err validator.FieldError
-}
-
-func (q FiledError) String() string {
-	var sb strings.Builder
-
-	sb.WriteString("Filed is required '" + q.err.Field() + "'")
-
-	// Print condition parameters, e.g. oneof=red blue -> { red blue }
-	if q.err.Param() != "" {
-		sb.WriteString(" { " + q.err.Param() + " }")
-	}
-
-	if q.err.Value() != nil && q.err.Value() != "" {
-		sb.WriteString(fmt.Sprintf(", actual: %v", q.err.Value()))
-	}
-
-	return sb.String()
 }

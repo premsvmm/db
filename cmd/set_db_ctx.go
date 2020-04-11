@@ -20,7 +20,7 @@ var setDbCtxCmd = &cobra.Command{
 			result, _, _ := service.ValidateContextIsPresent(value, conf)
 			if result {
 				service.GenerateGoFile(file_path, conf)
-				fmt.Println("🔥 Db context is set")
+				fmt.Println("🔥 DB : " + conf.CurrentDbContext + " is set")
 			} else {
 				fmt.Println("❌ db context is not present")
 				service.ListDownTheDBName(conf)
