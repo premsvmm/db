@@ -31,7 +31,7 @@ var configureCmd = &cobra.Command{
 			conf.ReturnType = ""
 			conf.Username = ""
 			time.Sleep(1000 * time.Millisecond)
-			service.GenerateGoFile(file_path, conf)
+			service.GenerateGoFile(filePath, conf)
 			fmt.Println("🤯️ Values are reseted, Please set the value again")
 		} else {
 			if service_url != "" {
@@ -56,7 +56,7 @@ var configureCmd = &cobra.Command{
 				fmt.Println("👀️ Password is set")
 				time.Sleep(1000 * time.Millisecond)
 			}
-			service.GenerateGoFile(file_path, conf)
+			service.GenerateGoFile(filePath, conf)
 		}
 	},
 }
@@ -70,10 +70,10 @@ func init() {
 	configureCmd.Flags().StringVarP(&return_type, "returntype", "r", "", "Return type (json or map)")
 	configureCmd.Example=
 `
-db configure -U <url> -N <basic auth username> -P <basic auth password>
+👉 db configure -U <url> -N <basic auth username> -P <basic auth password>
 
-db configure -R  true  - (To Reset the config values)
+👉 db configure -R  true  - (To Reset the config values)
 
-db configure -r  json  - (Return type of response (json or map))
+👉 db configure -r  json  - (Return type of response (json or map))
 `
 }

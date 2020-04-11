@@ -11,7 +11,7 @@ import (
 var setDbCtxCmd = &cobra.Command{
 	Use:   "set",
 	Short: "Set the current db context to access",
-	Long:  `Detail description`,
+	Long:  `Set the current db context to access the database`,
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		value := strings.Join(args, "")
@@ -19,7 +19,7 @@ var setDbCtxCmd = &cobra.Command{
 			conf.CurrentDbContext = value
 			result, _, _ := service.ValidateContextIsPresent(value, conf)
 			if result {
-				service.GenerateGoFile(file_path, conf)
+				service.GenerateGoFile(filePath, conf)
 				fmt.Println("🔥 DB : " + conf.CurrentDbContext + " is set")
 			} else {
 				fmt.Println("❌ db is not present in properties")
@@ -32,8 +32,5 @@ var setDbCtxCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(setDbCtxCmd)
-	setDbCtxCmd.Example=
-`
-db set <dbname> - (set the db which the query need to execute)
-`
+	setDbCtxCmd.Example= `👉 db set <dbname> - (set the db which the query need to execute)`
 }

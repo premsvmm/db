@@ -8,7 +8,8 @@ import (
 )
 
 const (
-	version = "1.0.7"
+	version     = "1.0.7"
+	github_repo = "premsvmm/db"
 )
 
 func main() {
@@ -18,7 +19,7 @@ func main() {
 
 func doSelfUpdate() {
 	v := semver.MustParse(version)
-	latest, err := selfupdate.UpdateSelf(v, "premsvmm/db")
+	latest, err := selfupdate.UpdateSelf(v, github_repo)
 	if err != nil {
 		log.Println("Binary update failed:", err)
 		return

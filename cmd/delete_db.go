@@ -21,7 +21,7 @@ var deleteDbCmd = &cobra.Command{
 		}
 		if result {
 			conf.Database = append(conf.Database[:key], conf.Database[key+1:]...)
-			service.GenerateGoFile(file_path, conf)
+			service.GenerateGoFile(filePath, conf)
 			fmt.Println("👍 DB is removed")
 		}
 	},
@@ -29,8 +29,5 @@ var deleteDbCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(deleteDbCmd)
-	deleteDbCmd.Example=
-`
-delete <dbname> - (delete the db value from properties)
-`
+	deleteDbCmd.Example= `👉 delete <dbname> - (delete the db value from properties)`
 }

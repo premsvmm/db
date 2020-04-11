@@ -31,7 +31,7 @@ var addDbCmd = &cobra.Command{
 			conf.Database = append(conf.Database, newDb)
 			service.PrintTheDatabase(newDb)
 			if service.AskForConfirmation() {
-				service.GenerateGoFile(file_path, conf)
+				service.GenerateGoFile(filePath, conf)
 			}
 		} else {
 			fmt.Println("****************************************")
@@ -53,7 +53,7 @@ func init() {
 	addDbCmd.Flags().StringVarP(&add_db.URL, "dburl", "8", "", "Datbase Url")
 	addDbCmd.Example =
 `
-db add -1 <jdbcdriver> -2 <host> -3 <port> -4 <dbname> -5 <dbusername> -6 <dbpassword> -7 <name> -8 <dburl>
+👉 db add -1 <jdbcdriver> -2 <host> -3 <port> -4 <dbname> -5 <dbusername> -6 <dbpassword> -7 <name> -8 <dburl>
 
 Default Values:
 -----------------

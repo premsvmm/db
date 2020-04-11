@@ -17,8 +17,5 @@ var getDbCtxCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(getDbCtxCmd)
-	getDbCtxCmd.Example=
-`
-db get  - (Display the current db set)
-`
+	getDbCtxCmd.Example= `👉 db get  - (Display the current db set)`
 }

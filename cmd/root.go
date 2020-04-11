@@ -10,14 +10,14 @@ import (
 )
 
 var (
-	conf      model.Config
-	file_path string
+	conf     model.Config
+	filePath string
 )
 
 const (
-	folder_dir = "/src/github.com/premsvmm/db/config/"
-	file_name  = ".db"
-	extension  = "json"
+	folderDir = "/src/github.com/premsvmm/db/config/"
+	fileName  = ".db"
+	extension = "json"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -41,19 +41,19 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(InitConfig)
 	rootCmd.Example = `
-1 db list 
+👉 db list 
     
-2 db exec "select * from payments limit 1"
+👉 db exec "select * from payments limit 1"
 
-3 db get
+👉 db get
 
-4 db set <name>
+👉 db set <name>
 
-5 db delete <name>
+👉 db delete <name>
 
-6 db add  -1 <jdbcdriver> -2 <host> -3 <port> -4 <dbname> -5 <dbusername> -6 <dbpassword> -7 <name> -8 <dburl>
+👉 db add  -1 <jdbcdriver> -2 <host> -3 <port> -4 <dbname> -5 <dbusername> -6 <dbpassword> -7 <name> -8 <dburl>
 
-7 db configure -U <url> -N <basic auth username> -P <basic auth password>
+👉 db configure -U <url> -N <basic auth username> -P <basic auth password>
 `
 }
 
@@ -61,13 +61,13 @@ func init() {
 func InitConfig() {
 	//present working directory
 	dir := build.Default.GOPATH
-	file_path = dir + folder_dir + file_name + "." + extension
-	if _, err := os.Stat(file_path); os.IsNotExist(err) {
-		os.Mkdir(file_path, os.ModeDir)
+	filePath = dir + folderDir + fileName + "." + extension
+	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+		os.Mkdir(filePath, os.ModeDir)
 	}
 	// Search config in home directory with name ".db" (without extension).
-	viper.AddConfigPath(dir + folder_dir)
-	viper.SetConfigName(file_name)
+	viper.AddConfigPath(dir + folderDir)
+	viper.SetConfigName(fileName)
 	viper.SetConfigType(extension)
 	viper.AutomaticEnv() // read in environment variables that match
 	// If a config file is found, read it in.
