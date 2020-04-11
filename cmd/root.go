@@ -9,14 +9,21 @@ import (
 )
 
 var (
-	conf model.Config
+	conf      model.Config
+	file_path string
+)
+
+const (
+	folder_dir = "/config/"
+	file_name  = ".db"
+	extension  = "json"
 )
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "db",
-	Short: "db cli helps to connect to the mock server",
-	Long: `db cli helps to connect to the mock server
+	Short: "db cli helps to connect to the stage database",
+	Long: `db cli helps to connect to the stage database
 ********************************************		
 `,
 }
@@ -32,6 +39,11 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(InitConfig)
+	rootCmd.Example = `
+-> db list 
+    
+-> db exec "select * from payments limit 1"
+`
 }
 
 // initConfig reads in config file and ENV variables if set.
@@ -43,9 +55,10 @@ func InitConfig() {
 		os.Exit(1)
 	}
 	// Search config in home directory with name ".db" (without extension).
-	viper.AddConfigPath(dir + "/config/")
-	viper.SetConfigName(".db")
-	viper.SetConfigType("json")
+	viper.AddConfigPath(dir + folder_dir)
+	viper.SetConfigName(file_name)
+	viper.SetConfigType(extension)
+	file_path = dir + folder_dir + file_name + "." + extension
 	viper.AutomaticEnv() // read in environment variables that match
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err != nil {

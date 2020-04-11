@@ -46,3 +46,9 @@ func ExecuteMock(sql string, conf model.Config) {
 		}
 	}
 }
+
+func GenerateGoFile(file_path string,conf model.Config){
+	jsonValue, _ := json.MarshalIndent(conf,"","")
+	formatedBody := pretty.Pretty(jsonValue)
+	ioutil.WriteFile(file_path,formatedBody,0644)
+}
