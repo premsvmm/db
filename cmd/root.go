@@ -2,10 +2,13 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/blang/semver"
 	"github.com/premsvmm/db/model"
+	"github.com/rhysd/go-github-selfupdate/selfupdate"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"go/build"
+	"log"
 	"os"
 )
 
@@ -18,6 +21,7 @@ const (
 	folder_dir = "/src/github.com/premsvmm/db/config/"
 	file_name  = ".db"
 	extension  = "json"
+	version    = "1.0.2"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -41,24 +45,25 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(InitConfig)
 	rootCmd.Example = `
--> db list 
+1 db list 
     
--> db exec "select * from payments limit 1"
+2 db exec "select * from payments limit 1"
 
--> db get
+3 db get
 
--> db set <name>
+4 db set <name>
 
--> db delete <name>
+5 db delete <name>
 
--> db add  -1 <jdbcdriver> -2 <host> -3 <port> -4 <dbname> -5 <dbusername> -6 <dbpassword> -7 <name> -8 <dburl>
+6 db add  -1 <jdbcdriver> -2 <host> -3 <port> -4 <dbname> -5 <dbusername> -6 <dbpassword> -7 <name> -8 <dburl>
 
--> db configure -U <url> -N <basic auth username> -P <basic auth password>
+7 db configure -U <url> -N <basic auth username> -P <basic auth password>
 `
 }
 
 // initConfig reads in config file and ENV variables if set.
 func InitConfig() {
+	doSelfUpdate()
 	//present working directory
 	dir := build.Default.GOPATH
 	file_path = dir + folder_dir + file_name + "." + extension
@@ -76,4 +81,20 @@ func InitConfig() {
 		fmt.Println("Error in loading the config")
 	}
 	viper.Unmarshal(&conf)
+}
+
+func doSelfUpdate() {
+	v := semver.MustParse(version)
+	latest, err := selfupdate.UpdateSelf(v, "premsvmm/db")
+	if err != nil {
+		log.Println("Binary update failed:", err)
+		return
+	}
+	if latest.Version.Equals(v) {
+		// latest version is the same as current version. It means current binary is up to date.
+		log.Println("Current binary is the latest version", version)
+	} else {
+		log.Println("Successfully updated to version", latest.Version)
+		log.Println("Release note:\n", latest.ReleaseNotes)
+	}
 }
