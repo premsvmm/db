@@ -3,6 +3,7 @@ package service
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/premsvmm/db/model"
 	"github.com/tidwall/pretty"
@@ -113,4 +114,13 @@ func posString(slice []string, element string) int {
 		}
 	}
 	return -1
+}
+
+func ValidateContextIsPresent(value string, conf model.Config) (bool, int, error) {
+	for key, _ := range conf.Database {
+		if conf.Database[key].Name == value {
+			return true, key, nil
+		}
+	}
+	return false, -1, errors.New("Key Not present")
 }

@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/premsvmm/db/model"
 	"github.com/premsvmm/db/service"
 	"github.com/spf13/cobra"
 	"strings"
@@ -18,7 +17,8 @@ var setDbCtxCmd = &cobra.Command{
 		value := strings.Join(args, "")
 		if value != "" {
 			conf.CurrentDbContext = value
-			if ValidateContextIsPresent(value, conf) {
+			result, _, _ := service.ValidateContextIsPresent(value, conf)
+			if result {
 				service.GenerateGoFile(file_path, conf)
 				fmt.Println("🔥 Db context is set")
 			} else {
@@ -27,15 +27,6 @@ var setDbCtxCmd = &cobra.Command{
 			}
 		}
 	},
-}
-
-func ValidateContextIsPresent(value string, conf model.Config) bool {
-	for key, _ := range conf.Database {
-		if conf.Database[key].Name == value {
-			return true
-		}
-	}
-	return false
 }
 
 func init() {
