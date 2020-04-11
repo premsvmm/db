@@ -5,6 +5,7 @@ import (
 	"github.com/premsvmm/db/model"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"io/ioutil"
 	"os"
 )
 
@@ -64,11 +65,14 @@ func InitConfig() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+	file_path = dir + folder_dir + file_name + "." + extension
+	if _, err := os.Stat(file_path); os.IsNotExist(err) {
+		ioutil.WriteFile(file_path, nil, 0644)
+	}
 	// Search config in home directory with name ".db" (without extension).
 	viper.AddConfigPath(dir + folder_dir)
 	viper.SetConfigName(file_name)
 	viper.SetConfigType(extension)
-	file_path = dir + folder_dir + file_name + "." + extension
 	viper.AutomaticEnv() // read in environment variables that match
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err != nil {
