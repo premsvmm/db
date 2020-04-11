@@ -17,7 +17,6 @@ func main() {
 }
 
 func doSelfUpdate() {
-	selfupdate.EnableLog()
 	v := semver.MustParse(version)
 	latest, err := selfupdate.UpdateSelf(v, "premsvmm/db")
 	if err != nil {
