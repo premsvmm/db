@@ -57,7 +57,60 @@ func ListDownTheDBName(conf model.Config) {
 	fmt.Println(`List of Database added in config file:
 **************************************`)
 	for key, _ := range conf.Database {
-		fmt.Println("👻 "+conf.Database[key].Name)
+		fmt.Println("👻 " + conf.Database[key].Name)
 	}
 	fmt.Println("**************************************")
+}
+
+func PrintTheConfig(conf model.Config) {
+	jsonValue, _ := json.MarshalIndent(conf, "", "")
+	formatedBody := pretty.Pretty(jsonValue)
+	fmt.Println(string(pretty.Color(formatedBody, nil)))
+}
+
+func PrintTheDatabase(conf model.Db) {
+	jsonValue, _ := json.MarshalIndent(conf, "", "")
+	formatedBody := pretty.Pretty(jsonValue)
+	fmt.Println(string(pretty.Color(formatedBody, nil)))
+}
+
+var (
+	count = 1
+)
+
+func AskForConfirmation() bool {
+	if count == 1 {
+		fmt.Print("Please type (y)) or (n) and then press enter:")
+	}
+	var response string
+	_, err := fmt.Scanln(&response)
+	count++
+	if err != nil {
+		fmt.Println(err)
+	}
+	okayResponses := []string{"y", "Y", "yes", "Yes", "YES"}
+	nokayResponses := []string{"n", "N", "no", "No", "NO"}
+	if containsString(okayResponses, response) {
+		count = 1
+		return true
+	} else if containsString(nokayResponses, response) {
+		count = 1
+		return false
+	} else {
+		fmt.Print("Seems wrong Input , Please type (y)) or (n) and then press enter:")
+		return AskForConfirmation()
+	}
+}
+
+func containsString(slice []string, element string) bool {
+	return !(posString(slice, element) == -1)
+}
+
+func posString(slice []string, element string) int {
+	for index, elem := range slice {
+		if elem == element {
+			return index
+		}
+	}
+	return -1
 }

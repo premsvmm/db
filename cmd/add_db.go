@@ -3,59 +3,67 @@ package cmd
 import (
 	"fmt"
 	"github.com/go-playground/validator/v10"
+	"github.com/premsvmm/db/model"
+	"github.com/premsvmm/db/service"
 	"github.com/spf13/cobra"
 	"strings"
 )
 
-type AddDb struct {
-	JdbcDriver string `validate:"required"`
-	Host       string `validate:"required"`
-	Port       string `validate:"required"`
-	DbName     string `validate:"required"`
-	DbUsername string `validate:"required"`
-	DbPassword string `validate:"required"`
-	Url        string
-	Name       string `validate:"required"`
-}
-
 var (
-	add_db   AddDb
+	add_db   model.Db
 	validate *validator.Validate
 )
 
-// addDbCmd represents the addDb command
 var addDbCmd = &cobra.Command{
 	Use:   "add-db",
 	Short: "Add db value to properties",
 	Long:  `Add db value to properties.`,
 	Run: func(cmd *cobra.Command, args []string) {
+		//Ref :https://stackoverflow.com/questions/33892599/how-to-initialize-values-for-nested-struct-array-in-golang
 		if ValidateAllValuePresent() {
-			fmt.Print("The above mentioned fields are required")
+			newDb := model.Db{
+				JdbcDrive:  add_db.JdbcDrive,
+				Host:       add_db.Host,
+				Port:       add_db.Port,
+				DbName:     add_db.DbName,
+				DbUserName: add_db.DbUserName,
+				DbPassword: add_db.DbPassword,
+				URL:        add_db.URL,
+				Name:       add_db.Name,
+			}
+			conf.Database = append(conf.Database, newDb)
+			service.PrintTheDatabase(newDb)
+			if service.AskForConfirmation() {
+				service.GenerateGoFile(file_path, conf)
+			}
 		} else {
-			fmt.Print("false")
+			fmt.Println("****************************************")
+			fmt.Println("The above mentioned fields are required")
+			fmt.Println("****************************************")
 		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(addDbCmd)
-	addDbCmd.Flags().StringVarP(&add_db.JdbcDriver, "jdbcdriver", "1", "", "JDBC criver")
+	addDbCmd.Flags().StringVarP(&add_db.JdbcDrive, "jdbcdriver", "1", "", "JDBC criver")
 	addDbCmd.Flags().StringVarP(&add_db.Host, "host", "2", "", "Host")
 	addDbCmd.Flags().StringVarP(&add_db.Port, "port", "3", "", "Port")
 	addDbCmd.Flags().StringVarP(&add_db.DbName, "dbname", "4", "", "Database name")
-	addDbCmd.Flags().StringVarP(&add_db.DbUsername, "dbusername", "5", "", "Database username")
+	addDbCmd.Flags().StringVarP(&add_db.DbUserName, "dbusername", "5", "", "Database username")
 	addDbCmd.Flags().StringVarP(&add_db.DbPassword, "dbpassword", "6", "", "Database password")
 	addDbCmd.Flags().StringVarP(&add_db.Name, "name", "7", "", "Name")
-	addDbCmd.Flags().StringVarP(&add_db.Url, "dburl", "8", "", "Datbase Url")
+	addDbCmd.Flags().StringVarP(&add_db.URL, "dburl", "8", "", "Datbase Url")
 }
 
 func ValidateAllValuePresent() bool {
 	validate = validator.New()
 	err := validate.Struct(add_db)
 	if err != nil {
+		fmt.Println("****************************************")
 		for _, e := range err.(validator.ValidationErrors) {
 			fmt.Print("❌ ")
-			fmt.Println(fieldError{e}.String())
+			fmt.Println(FiledError{e}.String())
 
 		}
 		return false
@@ -63,15 +71,14 @@ func ValidateAllValuePresent() bool {
 	return true
 }
 
-type fieldError struct {
+type FiledError struct {
 	err validator.FieldError
 }
 
-func (q fieldError) String() string {
+func (q FiledError) String() string {
 	var sb strings.Builder
 
-	sb.WriteString("validation failed on field '" + q.err.Field() + "'")
-	sb.WriteString(", condition: " + q.err.ActualTag())
+	sb.WriteString("Filed is required '" + q.err.Field() + "'")
 
 	// Print condition parameters, e.g. oneof=red blue -> { red blue }
 	if q.err.Param() != "" {
