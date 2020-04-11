@@ -28,6 +28,7 @@ var addDbCmd = &cobra.Command{
 				URL:        add_db.URL,
 				Name:       add_db.Name,
 			}
+			newDb.URL="" //Setting it as null,as of now there is no use for this
 			conf.Database = append(conf.Database, newDb)
 			service.PrintTheDatabase(newDb)
 			if service.AskForConfirmation() {
