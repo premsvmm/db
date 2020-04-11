@@ -21,7 +21,7 @@ const (
 	folder_dir = "/src/github.com/premsvmm/db/config/"
 	file_name  = ".db"
 	extension  = "json"
-	version    = "1.0.2"
+	version    = "1.0.4"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -84,8 +84,11 @@ func InitConfig() {
 }
 
 func doSelfUpdate() {
+	selfupdate.EnableLog()
 	v := semver.MustParse(version)
+	fmt.Println(v)
 	latest, err := selfupdate.UpdateSelf(v, "premsvmm/db")
+	fmt.Println(latest)
 	if err != nil {
 		log.Println("Binary update failed:", err)
 		return
