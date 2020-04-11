@@ -14,3 +14,7 @@ var addDbCmd = &cobra.Command{
 		fmt.Println("addDb called")
 	},
 }
+
+func init() {
+	rootCmd.AddCommand(addDbCmd)
+}

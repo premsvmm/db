@@ -19,3 +19,7 @@ var listCmd = &cobra.Command{
 		fmt.Println("**************************************")
 	},
 }
+
+func init() {
+	rootCmd.AddCommand(listCmd)
+}

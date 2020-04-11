@@ -14,3 +14,6 @@ var deleteDbCmd = &cobra.Command{
 		fmt.Println("addDb called")
 	},
 }
+func init() {
+	rootCmd.AddCommand(deleteDbCmd)
+}

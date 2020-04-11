@@ -16,3 +16,6 @@ var execCmd = &cobra.Command{
 		service.ExecuteMock(str,conf)
 	},
 }
+func init() {
+	rootCmd.AddCommand(execCmd)
+}

@@ -6,17 +6,17 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"os"
-
 )
+
 var (
 	conf model.Config
 )
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "db",
 	Short: "db cli helps to connect to the mock server",
-	Long:
-	`db cli helps to connect to the mock server
+	Long: `db cli helps to connect to the mock server
 ********************************************		
 `,
 }
@@ -32,16 +32,10 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(InitConfig)
-	rootCmd.AddCommand(execCmd)
-	rootCmd.AddCommand(setDbCtxCmd)
-	rootCmd.AddCommand(configureCmd)
-	rootCmd.AddCommand(addDbCmd)
-	rootCmd.AddCommand(deleteDbCmd)
-	rootCmd.AddCommand(listCmd)
 }
 
 // initConfig reads in config file and ENV variables if set.
-func InitConfig(){
+func InitConfig() {
 	//present working directory
 	dir, err := os.Getwd()
 	if err != nil {

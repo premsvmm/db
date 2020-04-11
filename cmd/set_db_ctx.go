@@ -15,4 +15,6 @@ var setDbCtxCmd = &cobra.Command{
 		fmt.Println("setDbCtx called")
 	},
 }
-
+func init() {
+	rootCmd.AddCommand(setDbCtxCmd)
+}
