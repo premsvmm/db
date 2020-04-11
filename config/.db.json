@@ -7,7 +7,7 @@
       "db_name": "prem",
       "db_user_Name": "prem",
       "db_password": "prem",
-      "url": "prem",
+      "url": "",
       "name": "func-api"
     },
     {
@@ -17,7 +17,7 @@
       "db_name": "prem",
       "db_user_Name": "prem",
       "db_password": "prem",
-      "url": "prem",
+      "url": "",
       "name": "func-automation"
     }
   ],
