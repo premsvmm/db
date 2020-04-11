@@ -7,6 +7,7 @@ import (
 )
 
 // execCmd represents the exec command
+
 var execCmd = &cobra.Command{
 	Use:   "exec",
 	Short: "execute the sql commands",
