@@ -3,13 +3,16 @@ module github.com/premsvmm/db
 go 1.13
 
 require (
+	github.com/debber/debber-v0.3 v0.0.0-20160226200915-cf10fd052975 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/go-playground/validator/v10 v10.2.0
+	github.com/laher/argo v0.0.0-20140722103944-11d91c83cc0f // indirect
+	github.com/laher/goxc v0.18.1 // indirect
 	github.com/mitchellh/mapstructure v1.2.2 // indirect
 	github.com/pelletier/go-toml v1.7.0 // indirect
 	github.com/spf13/afero v1.2.2 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
-	github.com/spf13/cobra v0.0.7
+	github.com/spf13/cobra v1.0.0
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.6.3
