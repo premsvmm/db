@@ -68,4 +68,12 @@ func init() {
 	configureCmd.Flags().StringVarP(&password, "password", "P", "", "Password")
 	configureCmd.Flags().StringVarP(&reset, "reset", "R", "", "Reset")
 	configureCmd.Flags().StringVarP(&return_type, "returntype", "r", "", "Return type (json or map)")
+	configureCmd.Example=
+`
+db configure -U <url> -N <basic auth username> -P <basic auth password>
+
+db configure -R  true  - (To Reset the config values)
+
+db configure -r  json  - (Return type of response (json or map))
+`
 }

@@ -51,7 +51,13 @@ func init() {
 	addDbCmd.Flags().StringVarP(&add_db.DbPassword, "dbpassword", "6", "", "Database password")
 	addDbCmd.Flags().StringVarP(&add_db.Name, "name", "7", "", "Name")
 	addDbCmd.Flags().StringVarP(&add_db.URL, "dburl", "8", "", "Datbase Url")
-	addDbCmd.Example = `db add -1 <jdbcdriver> -2 <host> -3 <port> -4 <dbname> -5 <dbusername> -6 <dbpassword> -7 <name> -8 <dburl>
+	addDbCmd.Example =
+`
+db add -1 <jdbcdriver> -2 <host> -3 <port> -4 <dbname> -5 <dbusername> -6 <dbpassword> -7 <name> -8 <dburl>
+
 Default Values:
-jdbcdriver = MYSQL_DRIVER,POSTGRESS_DRIVER`
+-----------------
+jdbcdriver = MYSQL_DRIVER,POSTGRESS_DRIVER
+
+`
 }

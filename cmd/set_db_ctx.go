@@ -32,4 +32,8 @@ var setDbCtxCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(setDbCtxCmd)
+	setDbCtxCmd.Example=
+`
+db set <dbname> - (set the db which the query need to execute)
+`
 }

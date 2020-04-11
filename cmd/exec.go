@@ -20,4 +20,10 @@ var execCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(execCmd)
+	execCmd.Example=
+`
+db exec "sql query"
+
+Note: double quotes are not allowed inside the query, using single quotes ('). 
+`
 }

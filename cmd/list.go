@@ -17,4 +17,8 @@ var listCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(listCmd)
+	listCmd.Example=
+`
+db list - (display all db added to properties file)
+`
 }

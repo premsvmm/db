@@ -43,6 +43,16 @@ func init() {
 -> db list 
     
 -> db exec "select * from payments limit 1"
+
+-> db get
+
+-> db set <name>
+
+-> db delete <name>
+
+-> db add  -1 <jdbcdriver> -2 <host> -3 <port> -4 <dbname> -5 <dbusername> -6 <dbpassword> -7 <name> -8 <dburl>
+
+-> db configure -U <url> -N <basic auth username> -P <basic auth password>
 `
 }
 

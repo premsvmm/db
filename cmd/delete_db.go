@@ -29,4 +29,8 @@ var deleteDbCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(deleteDbCmd)
+	deleteDbCmd.Example=
+`
+delete <dbname> - (delete the db value from properties)
+`
 }
