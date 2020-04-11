@@ -9,7 +9,7 @@ import (
 
 // addDbCmd represents the addDb command
 var deleteDbCmd = &cobra.Command{
-	Use:   "delete-db",
+	Use:   "delete",
 	Short: "Delete db value to properties",
 	Long:  `Delete db value to properties.`,
 	Args:  cobra.ExactArgs(1),

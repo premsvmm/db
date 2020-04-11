@@ -15,7 +15,7 @@ var (
 )
 
 var addDbCmd = &cobra.Command{
-	Use:   "add-db",
+	Use:   "add",
 	Short: "Add db value to properties",
 	Long:  `Add db value to properties.`,
 	Run: func(cmd *cobra.Command, args []string) {
