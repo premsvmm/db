@@ -5,7 +5,7 @@ import (
 	"github.com/premsvmm/db/model"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"io/ioutil"
+	"go/build"
 	"os"
 )
 
@@ -15,7 +15,7 @@ var (
 )
 
 const (
-	folder_dir = "/config/"
+	folder_dir = "/src/github.com/premsvmm/db/config/"
 	file_name  = ".db"
 	extension  = "json"
 )
@@ -60,15 +60,10 @@ func init() {
 // initConfig reads in config file and ENV variables if set.
 func InitConfig() {
 	//present working directory
-	dir, err := os.Getwd()
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	dir := build.Default.GOPATH
 	file_path = dir + folder_dir + file_name + "." + extension
-	fmt.Println(file_path)
 	if _, err := os.Stat(file_path); os.IsNotExist(err) {
-		ioutil.WriteFile(file_path, nil, 0644)
+		os.Mkdir(file_path, os.ModeDir)
 	}
 	// Search config in home directory with name ".db" (without extension).
 	viper.AddConfigPath(dir + folder_dir)
