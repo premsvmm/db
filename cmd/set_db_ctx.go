@@ -9,7 +9,7 @@ import (
 
 // setDbCtxCmd represents the setDbCtx command
 var setDbCtxCmd = &cobra.Command{
-	Use:   "ctx",
+	Use:   "set",
 	Short: "Set the current db context to access",
 	Long:  `Detail description`,
 	Args:  cobra.ExactArgs(1),

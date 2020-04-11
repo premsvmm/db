@@ -7,9 +7,9 @@ import (
 
 // getDbCtxCmd represents the getDbCtxCmd command
 var getDbCtxCmd = &cobra.Command{
-	Use:   "gctx",
-	Short: "get the current db context to access",
-	Long:  `Detail description`,
+	Use:   "get",
+	Short: "Get Current Db Context",
+	Long:  "Get the current Db Context \nUsage : \n-> db get",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Current Db Context : " + conf.CurrentDbContext)
 	},
