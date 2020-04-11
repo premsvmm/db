@@ -20,6 +20,10 @@ After installation, type `db`
 ![DB_COMMAND](https://github.com/premsvmm/db/blob/master/img/1.png)
 
 
+Overview:
+
+![DB_EXAMPLE](https://github.com/premsvmm/db/blob/master/img/2.gif)
+
 **Reference Link**
 
 Go Path Installation:
