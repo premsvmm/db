@@ -66,6 +66,7 @@ func InitConfig() {
 		os.Exit(1)
 	}
 	file_path = dir + folder_dir + file_name + "." + extension
+	fmt.Println(file_path)
 	if _, err := os.Stat(file_path); os.IsNotExist(err) {
 		ioutil.WriteFile(file_path, nil, 0644)
 	}
@@ -76,6 +77,7 @@ func InitConfig() {
 	viper.AutomaticEnv() // read in environment variables that match
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err != nil {
+		fmt.Println(err)
 		fmt.Println("Error in loading the config")
 	}
 	viper.Unmarshal(&conf)
