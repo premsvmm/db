@@ -21,7 +21,7 @@ const (
 	folder_dir = "/src/github.com/premsvmm/db/config/"
 	file_name  = ".db"
 	extension  = "json"
-	version    = "1.0.2"
+	version    = "v1.0.2"
 )
 
 // rootCmd represents the base command when called without any subcommands
